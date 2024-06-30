@@ -1,0 +1,41 @@
+sudo yum update -y
+sudo yum install -y httpd
+sudo systemctl start httpd
+sudo systemctl enable httpd
+
+cd /var/www/html
+sudo vi index.html
+    <h1>Hi, Welcome!!</h1>
+    esc :wq enter
+sudo systemctl restart httpd
+
+Add inbound rules:
+You need open the following 4 ports:
+    SSH – TCP Port 22
+    HTTP – TCP Port 80  -- we use this for testing our webpage
+    HTTPS – TCP Port 443 -- browser won't trust it because of unavailability of valid SSL.
+
+1. Private IPv4 addresses
+A private IPv4 address is an IP address that's not reachable over the Internet. 
+You can use private IPv4 addresses for communication between instances in the same VPC.
+
+2. Public IPv4 address
+A public IP address is an IPv4 address that's reachable from the Internet. 
+You can use public addresses for communication between your instances and the Internet.
+
+3. Private IP DNS name (IPv4 only)
+You can use the Private IP DNS name (IPv4 only) hostname for communication between instances in the same VPC. 
+You can resolve the Private IP DNS name (IPv4 only) hostnames of other instances in other VPCs as long as the instances are in the same AWS Region and the hostname of the other instance is in the private address space range defined by RFC 1918
+
+4. Public IPv4 DNS
+A public (external) IPv4 DNS hostname takes the form ec2-public-ipv4-address.compute-1.amazonaws.com for the us-east-1 Region, and ec2-public-ipv4-address.region.compute.amazonaws.com for other Regions. 
+The Amazon DNS server resolves a public DNS hostname to the public IPv4 address of the instance outside the network of the instance, and to the private IPv4 address of the instance from within the network of the instance. 
+
+
+Why You Need a Static IP Address
+    The public IP address that Amazon EC2 assigns to your instance automatically changes every time you stop and start the instance.
+    If you host your website on Amazon EC2, you should use a static IP address for your server. 
+    This way, your website will always be accessible at the same IP address.
+    
+    Amazon EC2 provides an Elastic IP address feature for this purpose. 
+    An Elastic IP address is a static IP address that stays the same after you stop and start your instance.
